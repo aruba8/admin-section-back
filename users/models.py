@@ -6,3 +6,6 @@ class UserModel(models.Model):
     last_name = models.CharField(max_length=100)
     middle_name = models.CharField(max_length=300, null=True)
     email = models.EmailField()
+
+    def __str__(self):
+        return self.first_name + ' ' + self.last_name

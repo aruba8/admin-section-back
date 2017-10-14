@@ -17,10 +17,16 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from rest_framework import routers
 
-from users import views
+from users import views as users_views
+from workers import views as workers_views
+from orders import views as orders_views
 
 router = routers.DefaultRouter()
-router.register(r'users', views.UserViewSet)
+router.register(r'users', users_views.UserViewSet)
+router.register(r'workers', workers_views.WorkerViewSet)
+router.register(r'worker_types', workers_views.WorkerTypeViewSet)
+router.register(r'orders', orders_views.OrdersViewSet)
+router.register(r'order_types', orders_views.OrderTypesViewSet)
 
 urlpatterns = [
     url(r'^', include(router.urls)),
