@@ -23,3 +23,10 @@ class WorkerSerializer(serializers.ModelSerializer):
         instance.worker_type = worker_type
         instance.save()
         return instance
+
+    def create(self, validated_data):
+        name = validated_data.pop('name')
+        worker_type_data = validated_data.pop('worker_type')
+        worker_type = WorkerType.objects.get(**worker_type_data)
+        worker = Worker.objects.create(name=name, worker_type=worker_type)
+        return worker
