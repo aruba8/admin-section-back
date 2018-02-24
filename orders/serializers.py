@@ -1,6 +1,8 @@
 from rest_framework import serializers
 
 from orders.models import OrderType, Order
+from workers.serializers import WorkerSerializer
+from users.serializers import UserSerializer
 
 
 class OrderTypeSerializer(serializers.ModelSerializer):
@@ -10,9 +12,9 @@ class OrderTypeSerializer(serializers.ModelSerializer):
 
 
 class OrderSerializer(serializers.ModelSerializer):
-    order_type = serializers.SlugRelatedField(slug_field='order_type_name',read_only=True)
-    assigned_to = serializers.SlugRelatedField(slug_field='name', many=False, read_only=True)
-    created_by = serializers.StringRelatedField(many=False)
+    assigned_to = WorkerSerializer(read_only=False)
+    order_type = OrderTypeSerializer(read_only=False)
+    created_by = UserSerializer(read_only=False)
 
     class Meta:
         model = Order
