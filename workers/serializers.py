@@ -10,7 +10,7 @@ class WorkerTypeSerializer(serializers.ModelSerializer):
 
 
 class WorkerSerializer(serializers.ModelSerializer):
-    worker_type = WorkerTypeSerializer(read_only=False)
+    worker_type = WorkerTypeSerializer(read_only=True)
 
     class Meta:
         model = Worker

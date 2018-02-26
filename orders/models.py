@@ -28,6 +28,4 @@ class Order(models.Model):
     order_type = models.ForeignKey(OrderType, on_delete=models.SET_NULL, null=True)
     assigned_to = models.ForeignKey(Worker, on_delete=models.SET_NULL, null=True)
     created_by = models.ForeignKey(UserModel, on_delete=models.SET_NULL, null=True)
-
-    def __str__(self):
-        return self.order_status
+    
