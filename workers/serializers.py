@@ -17,8 +17,8 @@ class WorkerSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     def update(self, instance, validated_data):
-        worker_type_id = self.initial_data['worker_type']
-        worker_type = WorkerType.objects.get(pk=worker_type_id)
+        worker_type = self.initial_data['worker_type']
+        worker_type = WorkerType.objects.get(pk=worker_type['id'])
         instance.name = validated_data['name']
         instance.worker_type = worker_type
         instance.save()
