@@ -18,7 +18,7 @@ class WorkerSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         worker_type = self.initial_data['worker_type']
-        worker_type = WorkerType.objects.get(pk=worker_type['id'])
+        worker_type = WorkerType.objects.get(**worker_type)
         instance.name = validated_data['name']
         instance.worker_type = worker_type
         instance.save()
@@ -26,7 +26,7 @@ class WorkerSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         name = validated_data.pop('name')
-        worker_type_data = validated_data.pop('worker_type')
+        worker_type_data = self.initial_data['worker_type']
         worker_type = WorkerType.objects.get(**worker_type_data)
         worker = Worker.objects.create(name=name, worker_type=worker_type)
         return worker
